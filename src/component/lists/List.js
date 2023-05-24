@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Form, Modal, Table,Button,Alert} from 'react-bootstrap';
 import "./list.css"
+import { Link } from "react-router-dom";
 
 const List = () => {
   const initial = {
@@ -19,6 +20,7 @@ const [id, setId] = useState(1);
 const [err, setErr] = useState(null);
 const [show, setShow] = useState(false); 
 const [infoShow, setInfoShow] = useState([]);
+
 /* const [infoId, setInfoId] = useState(0); */
 const handleClose = () =>{ 
       setShow(false);
@@ -109,7 +111,7 @@ const handleShows = (id) =>{
          { userInfo.length ===0 ?
            <Alert variant="danger">Ilya aucun gladiator</Alert>
           :   
-          <Table striped bordered hover variant="dark">
+          <Table striped bordered hover variant="dark" className="ta">
               <thead>
                   <tr className="stylet">
                       <th style={{ textAlign: "center" }}>No.</th>
@@ -125,7 +127,7 @@ const handleShows = (id) =>{
                   {userInfo.map((item, index) => {
                       return (
                           <tr key={index}>
-                              <th scope="row" onClick={() => handleShows(item.id)}>{index + 1}</th>
+                              <th scope="row">{index + 1}</th>
                               <td>{item.firstName}</td>
                               <td>{item.lastName}</td>
                               <td>{item.email}</td>
@@ -143,6 +145,12 @@ const handleShows = (id) =>{
                                   >
                                       Delete
                                   </button>
+                                  <Link
+                                     to={`/post/${item.id}`}
+                                      className="btn-view"
+                                  >
+                                      Voir detail
+                                  </Link>
                               </td>
                           </tr>
                       );
